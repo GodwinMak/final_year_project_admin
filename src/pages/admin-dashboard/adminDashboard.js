@@ -4,11 +4,9 @@ import Sidebar from '../../components/admin-sidebar/sidebar';
 import ViewUsers from '../../components/admin-users/ViewUsers';
 import Areas from '../../components/admin-areas/areas';
 import AddArea from '../../components/admin-areas/AddArea';
-import AddVirtualFence from '../../components/admin-areas/AddVirtualFence';
 import Reports from '../../components/admin-reports/reports';
 import { Context } from '../../context';
 import {useParams} from 'react-router-dom'; 
-// import {Data} from '../../data/jummy'
 import AddUser from '../../components/admin-users/AddUser';
 import AnimalList from '../../components/admin_animal/Animal_List';
 import AreaMap from '../../components/admin-areas/AreaMap';
@@ -49,7 +47,6 @@ const AdminDashboard = () => {
           {category === "view_users" && <ViewUsers />}
           {category === "edit_user" && <AddUser />}
           {category === "add_area" && <AddArea />}
-          {category === "fence" && <AddVirtualFence />}
           {category === "view_areas" && <Areas />}
           {category === "area_map" && <AreaMap />}
           {category === "view_animlas" && <AnimalList />}
