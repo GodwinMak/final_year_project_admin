@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <div className="form__container">
       <div className="loginbox">
-        <img src='/images/Avatar.png' alt="" className="avatar" />
+        <img src="/images/Avatar.png" alt="" className="avatar" />
         <h1 className="title">Sign in here</h1>
         <form onSubmit={(event) => handleLogin(event)}>
           <div>
@@ -61,6 +61,7 @@ const Login = () => {
               value={values.userName}
               placeholder="Enter user name"
               onChange={handleChange}
+              className="text-white bg-transparent border-0"
             />
           </div>
           <div>
@@ -71,6 +72,7 @@ const Login = () => {
               value={values.password}
               placeholder="Enter password"
               onChange={handleChange}
+              className="text-white bg-transparent border-0"
             />
           </div>
           <div>
