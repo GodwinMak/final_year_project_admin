@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
 const AddUser = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
@@ -9,9 +11,31 @@ const AddUser = () => {
     password: "",
     email: "",
     role: "",
+    area_name: ""
   });
   const [error, setError] = useState("");
   const [modal, setModal] = useState(false);
+  const [areas, setAreas] = useState([]);
+
+
+  useEffect(() => {
+    const fetchData = async ()=>{
+      try {
+        const response = await axios.get(
+          "https://apiv2.at.patrickmamsery.co.tz/api/areas/all"
+        );
+
+        setAreas(response.data)
+
+      } catch (error) {
+        console.log(error)
+      }
+      
+    }
+
+    fetchData()
+  },[])
+
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -19,9 +43,11 @@ const AddUser = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { first_name, last_name, username, password, email, role } = values;
+    const { first_name, last_name, username, password, email, role, area_name } = values;
+     const area =  areas.find((a) => a.area_name === area_name);
+     console.log(area)
     try {
-      const response = await axios.post(
+     await axios.post(
         "https://apiv2.at.patrickmamsery.co.tz/api/users/register",
         {
           first_name,
@@ -30,12 +56,15 @@ const AddUser = () => {
           password,
           email,
           role,
+          area_id: area.area_id
         }
-      );
+      ).then(()=>{
+        navigate("/admin-dashboard/view_users");
+      })
 
-      console.log(response);
+
     } catch (error) {
-      // console.error('Error adding user:', error);
+      console.error('Error adding user:', error);
       console.log(error.response.data.message);
       setError(error.response.data.message);
       setModal(true);
@@ -115,9 +144,9 @@ const AddUser = () => {
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-username"
+                id="grid-email"
                 type="email"
-                placeholder="JaneDoe@gmail.com"
+                placeholder="Your Email"
                 name="email"
                 onChange={handleChange}
                 required
@@ -134,7 +163,7 @@ const AddUser = () => {
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-password"
+                id="password"
                 type="password"
                 placeholder="******************"
                 name="password"
@@ -164,6 +193,29 @@ const AddUser = () => {
                 <option defaultValue>Choose Role</option>
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
+              <label
+                htmlFor="default"
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              >
+                Choose Area
+              </label>
+              <select
+                id="role"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                name="area_name"
+                onChange={handleChange}
+                required
+              >
+                <option defaultValue>Choose Role</option>
+                {areas &&
+                  areas.map((area, index) => {
+                    return <option key={index}>{area.area_name}</option>;
+                  })}
               </select>
             </div>
           </div>

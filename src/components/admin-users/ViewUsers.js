@@ -15,11 +15,8 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 
 const ViewUsers = () => {
- const userData = JSON.parse(
-   localStorage.getItem("user")
- );
+  const userData = JSON.parse(localStorage.getItem("user"));
 
- console.log(userData.username);
   const columnHelper = createColumnHelper();
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
@@ -41,7 +38,6 @@ const ViewUsers = () => {
 
     fetchAreaNames();
   }, []); // The empty dependency array ensures that this effect runs only once when the component mounts.
-  console.log(areaNames)
   const handleEditUser = async (user) => {
     // Implement your logic to handle the edit action
     setUserToEdit(user);
@@ -50,14 +46,13 @@ const ViewUsers = () => {
 
   const [isFormModified, setIsFormModified] = useState(true);
 
-  const handleSaveEdit = async () => {
+  const handleSaveEdit = async (event) => {
+    event.preventDefault()
     // Implement your logic to save the edited user data
-    console.log("Saving edited user:", userToEdit);
-
     const selectedArea = areaNames.find(
-      (area) => area.name === userToEdit.area
+      (area) => area.area_name === userToEdit.area_name
     );
-    const areaId = selectedArea ? selectedArea.id : null;
+    const areaId = selectedArea ? selectedArea.area_id : null;
 
     // Prepare the updated user data with the area ID
     const updatedUserData = {
@@ -66,20 +61,22 @@ const ViewUsers = () => {
     };
     try {
       // Update the user data using the endpoint http://localhost/api/users/:id
-      await axios.put(
+       await axios.put(
         `https://apiv2.at.patrickmamsery.co.tz/api/users/${userToEdit.user_id}`,
         updatedUserData
       );
+
 
       // Close the edit modal
       setIsEditModalVisible(false);
       setIsFormModified(true);
 
+      window.location.reload();
     } catch (error) {
       console.error("Error updating user data:", error);
     }
-
   };
+
 
   const handleShowDeleteModal = (user) => {
     setUserToDelete(user);
@@ -139,7 +136,7 @@ const ViewUsers = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Role",
     }),
-    columnHelper.accessor("area", {
+    columnHelper.accessor("area.area_name", {
       cell: (info) => <span>{info.getValue() || "Not Available"}</span>,
       header: "Area",
     }),
@@ -164,7 +161,7 @@ const ViewUsers = () => {
       header: "Actions",
     }),
   ];
-
+//
   const [globalFilter, setGlobalFilter] = useState("");
   const [tableData, setTableData] = useState([]);
   const [meta, setMeta] = useState({
@@ -181,10 +178,13 @@ const ViewUsers = () => {
           `https://apiv2.at.patrickmamsery.co.tz/api/users/all?page=${meta.currentPage}&pageSize=${meta.pageSize}`
         );
         const { users, meta: responseMeta } = response.data;
+        console.log(users);
+
         const filteredUsers = users.filter(
           (user) => user.username !== userData.username
         );
         setTableData(filteredUsers);
+        console.log(filteredUsers)
         setMeta(responseMeta);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -203,6 +203,8 @@ const ViewUsers = () => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+
+  // console.log(userToEdit)
 
   return (
     <div className="p-6 mb-6 bg-slate-50 min-h-sreen w-full md:container md:mx-auto relative overflow-x-auto  shadow-md sm-rounded-lg">
@@ -390,7 +392,7 @@ const ViewUsers = () => {
       )}
       {isEditModalVisible && (
         <div
-          className="relative z-20 w-full md:container md:mx-auto"
+          className="absolute  z-90 w-screen md:container md:mx-auto"
           aria-modal="true"
           role="dialog"
           aria-labelledby="user-edit-form"
@@ -467,7 +469,6 @@ const ViewUsers = () => {
                               }));
                               setIsFormModified(false); // Mark the form as modified
                             }}
-                            // onChange={handleChange}
                           />
                         </div>
                       </div>
@@ -477,23 +478,25 @@ const ViewUsers = () => {
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             htmlFor="grid-email"
                           >
-                            email
+                            Email
                           </label>
                           <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-email"
-                            type="email"
+                            id="grid-username"
+                            type="text"
+                            name="email"
                             value={userToEdit.email}
                             onChange={(e) => {
                               setUserToEdit((prevUser) => ({
                                 ...prevUser,
-                                email: e.target.value,
+                                username: e.target.value,
                               }));
                               setIsFormModified(false); // Mark the form as modified
                             }}
                           />
                         </div>
                       </div>
+
                       <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                           <label
@@ -533,7 +536,6 @@ const ViewUsers = () => {
                             id="role"
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             name="role"
-                            value={userToEdit.role || ""}
                             onChange={(e) => {
                               setUserToEdit((prevUser) => ({
                                 ...prevUser,
@@ -547,8 +549,11 @@ const ViewUsers = () => {
                             </option>
                             {areaNames.length > 0 &&
                               areaNames.map((area) => (
-                                <option key={area.id} value={area.name}>
-                                  {area.name}
+                                <option
+                                  key={area.area_id}
+                                  value={area.area_name}
+                                >
+                                  {area.area_name}
                                 </option>
                               ))}
                           </select>
@@ -558,7 +563,7 @@ const ViewUsers = () => {
                         <div className="w-full md:w-1/2 px-3">
                           <button
                             type="submit"
-                            disabled={isFormModified}
+                            // disabled={isFormModified}
                             className={`w-full bg-orange-500 hover:bg-orange-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
                               isFormModified ? "cursor-not-allowed" : ""
                             }`}
