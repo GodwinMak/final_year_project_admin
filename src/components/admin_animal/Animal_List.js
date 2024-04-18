@@ -226,9 +226,12 @@ const Animal_List = () => {
   }, [meta.currentPage, meta.pageSize])
 
   useEffect(() => {
-    const datepickerEl = document?.getElementById("datepickerId");
-    new Datepicker(datepickerEl, {});
-  }, []);
+    if (isEditModalVisible){
+      const datepickerEl = document.getElementById("editdatepickerId");
+        new Datepicker(datepickerEl, {});
+    }
+  }, [isEditModalVisible]);
+  
   return (
     <div className="mt-8  p-6 mb-6 bg-slate-50 min-h-sreen w-full md:container md:mx-auto relative overflow-x-auto  shadow-md sm-rounded-lg">
       <div className="p-2 max-w-5xl mx-auto   fill-gray-400">
@@ -509,7 +512,7 @@ const Animal_List = () => {
                               //   }));
                               //   setIsFormModified(false); // Mark the form as modified
                               // }}
-                              id="datepickerId"
+                              id="editdatepickerId"
                             />
                             <div className="flex absolute inset-y-0 right-0 items-center pr-3 pointer-events-none">
                               <svg
