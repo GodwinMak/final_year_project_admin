@@ -1,5 +1,15 @@
 export const Data = [
     {
+    icon: "fa fa-home",
+    inside: [
+      {
+        icon: 'fa fa-home',
+        text: 'Home',
+        url: 'welcome'
+      }
+    ]
+    },
+    {
         icon: 'fa-solid fa-user',
         inside: [
             {
@@ -33,9 +43,14 @@ export const Data = [
         icon: 'fa-solid fa-paw',
         inside: [
             {
+              icon: 'fa-solid fa-plus',
+              text: 'Add Animal',
+              url: 'add_animal'
+            },
+            {
                 icon: 'fa-solid fa-hippo',
                 text: 'List of Animals',
-                url: 'view_animlas'
+                url: 'view_animals'
             }
         ]
     },
@@ -50,23 +65,8 @@ export const Data = [
         ]
     },
     {
-        icon: 'fa-solid fa-box',
-        inside: [
-            {
-                icon: 'fa-solid fa-folder',
-                text: 'Summary',
-                url: 'summary'
-            },
-        ]
-    },
-    {
         icon: 'fa-solid fa-gear',
         inside: [
-            {
-                icon: 'fa-regular fa-id-card',
-                text: 'View Profile',
-                url: 'profile'
-            },
             {
                 icon: 'fa-solid fa-lock',
                 text: 'Change Password',

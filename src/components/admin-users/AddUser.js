@@ -45,7 +45,6 @@ const AddUser = () => {
     event.preventDefault();
     const { first_name, last_name, username, password, email, role, area_name } = values;
      const area =  areas.find((a) => a.area_name === area_name);
-     console.log(area)
     try {
      await axios.post(
         "https://apiv2.at.patrickmamsery.co.tz/api/users/register",
@@ -76,9 +75,10 @@ const AddUser = () => {
     setError("")
   }
   return (
-    <div>
+    <>
       <div className="p-6 mb-6 bg-slate-50  w-full md:container md:mx-auto">
-        <form className="w-full max-w-lg mx-auto" onSubmit={handleSubmit}>
+        <h2>User Registration</h2>
+        <form className="w-full max-w-lg mx-auto mt-8" onSubmit={handleSubmit}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
@@ -290,7 +290,7 @@ const AddUser = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

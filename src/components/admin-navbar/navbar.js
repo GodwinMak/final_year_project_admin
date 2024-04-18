@@ -65,7 +65,7 @@ const Navbar = () => {
             onClick={toogle}
             className="text-xl font-semibold leading-8 text-[#19191c] cursor-pointer "
           >
-            Dashboard
+            <i className="fa fa-bars"/>
           </div>
         </div>
         <div className="justify-start items-center gap-8 flex">

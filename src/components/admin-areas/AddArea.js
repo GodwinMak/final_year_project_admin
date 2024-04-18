@@ -67,7 +67,42 @@ const AddArea = () => {
   }
   return (
     <div className="p-6 mb-6 bg-slate-50 min-h-sreen">
+      <h2>Area Registration</h2>
       <form className="w-full w-full max-w-lg mx-auto" onSubmit={handleSubmit}>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="grid-first-name"
+            >
+              Area Name
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              id="grid-area-name"
+              type="text"
+              placeholder="Serengeti"
+              name="area_name"
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6 px-3">
+          <button
+            onClick={handleAddLocation}
+            type="button"
+            className=" w-full text-white bg-orange-600 
+                hover:bg-range-100 focus:ring-4 focus:outline-none 
+                focus:ring-orange-300 font-medium rounded-lg 
+                text-sm px-5 py-2.5 text-center dark:bg-orange-600 
+                dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+          >
+            <i className="fa-solid fa-map-location-dot" />
+
+            <span className="mx-2">Add Location On Map</span>
+          </button>
+        </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -120,40 +155,7 @@ const AddArea = () => {
             />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6 px-3">
-          <button
-            onClick={handleAddLocation}
-            type="button"
-            className=" w-full text-white bg-orange-600 
-                hover:bg-range-100 focus:ring-4 focus:outline-none 
-                focus:ring-orange-300 font-medium rounded-lg 
-                text-sm px-5 py-2.5 text-center dark:bg-orange-600 
-                dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-          >
-            <i className="fa-solid fa-map-location-dot" />
-
-            <span className="mx-2">Add Location On Map</span>
-          </button>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-first-name"
-            >
-              Area Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-area-name"
-              type="text"
-              placeholder="Serengeti"
-              name="area_name"
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
+        
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <button

@@ -178,7 +178,6 @@ const ViewUsers = () => {
           `https://apiv2.at.patrickmamsery.co.tz/api/users/all?page=${meta.currentPage}&pageSize=${meta.pageSize}`
         );
         const { users, meta: responseMeta } = response.data;
-        console.log(users);
 
         const filteredUsers = users.filter(
           (user) => user.username !== userData.username
@@ -204,10 +203,9 @@ const ViewUsers = () => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  // console.log(userToEdit)
 
   return (
-    <div className="p-6 mb-6 bg-slate-50 min-h-sreen w-full md:container md:mx-auto relative overflow-x-auto  shadow-md sm-rounded-lg">
+    <div className="mt-8 p-6 mb-6 bg-slate-50 min-h-sreen w-full md:container md:mx-auto relative overflow-x-auto  shadow-md sm-rounded-lg">
       <div className="p-2 max-w-5xl mx-auto   fill-gray-400">
         <div className="flex justify-between mb-2 w-full">
           <div className="w-full flex items-center gap-1">
@@ -223,7 +221,7 @@ const ViewUsers = () => {
         </div>
         <table className="rtl:text-right border border-gray-700 w-full text-left">
           <thead className="bg-orange-600 text-white">
-            {table.getHeaderGroups().map((headerGroup) => (
+            { table && table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th key={header.id} className="capitalize px-3.5 py-2">
@@ -256,7 +254,7 @@ const ViewUsers = () => {
                 </tr>
               ))
             ) : (
-              <tr className="text-center h-32">
+                <tr className="text-center h-32 text-black">
                 <td colSpan={12}>No Record Found!</td>
               </tr>
             )}
@@ -354,7 +352,7 @@ const ViewUsers = () => {
                         className="text-base font-semibold leading-6 text-gray-900"
                         id="modal-title"
                       >
-                        Deactivate account
+                        Delete User
                       </h3>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">

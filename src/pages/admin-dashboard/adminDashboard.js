@@ -10,15 +10,14 @@ import {useParams} from 'react-router-dom';
 import AddUser from '../../components/admin-users/AddUser';
 import AnimalList from '../../components/admin_animal/Animal_List';
 import AreaMap from '../../components/admin-areas/AreaMap';
-import Summary from '../../components/admin-summary/Summary';
-import ViewProfile from "../../components/admin-settings/ViewProfile"
 import ChangePassword from '../../components/admin-settings/ChangePassword';
-const AdminDashboard = () => {
-  const {category} = useParams();
-  console.log(category)
-  // let cat = Data.find((categ) => categ.url === parseInt(category) );
+import Welcome from '../Welcome';
+import AddAnimal from '../../components/admin_animal/AddAnimal';
 
-  let { state, dispatch } = useContext(Context)
+const AdminDashboard = () => {
+  let { state, dispatch } = useContext(Context);
+  const {category} = useParams();
+
   let [size, setSize] = useState(1000)
   window.addEventListener('resize', (e) => {
     setSize(e.currentTarget.innerWidth)
@@ -40,19 +39,18 @@ const AdminDashboard = () => {
             state.toggle
               ? ` ${state.toggleNavbar ? "md:ml-[310px]" : "ml-0 "}`
               : ` ${state.toggleNavbar ? "md:ml-[90px]" : "ml-0"}`
-          }  w-screen  z-10 mt-[76px]`}
-          style={{ height: "calc(100vh - 76px)" }}
+          }  w-full  z-10 mt-[76px]`}
         >
+          {category  === "welcome" && <Welcome/>}
           {category === "add_user" && <AddUser />}
           {category === "view_users" && <ViewUsers />}
           {category === "edit_user" && <AddUser />}
           {category === "add_area" && <AddArea />}
           {category === "view_areas" && <Areas />}
           {category === "area_map" && <AreaMap />}
-          {category === "view_animlas" && <AnimalList />}
+          {category === "add_animal" && <AddAnimal/>}
+          {category === "view_animals" && <AnimalList />}
           {category === "events_reports" && <Reports />}
-          {category === "summary" && <Summary />}
-          {category === "profile" && <ViewProfile />}
           {category === "change_password" && <ChangePassword/>}
         </div>
       </div>

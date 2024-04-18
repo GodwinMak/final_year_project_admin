@@ -1,24 +1,40 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../context";
 import { Link } from "react-router-dom";
 import { Data } from "../../data/jummy";
 
 const Sidebar = () => {
-  let { state, dispatch } = useContext(Context);
-  let [activeIcon, setActiveIcon] = useState("fa-solid fa-user");
-  let [activeCat, setActiveCat] = useState("Add User");
-  let [category, setCategory] = useState(Data[0].inside);
+  const { state, dispatch } = useContext(Context);
+  const [activeIcon, setActiveIcon] = useState(localStorage.getItem("activeIcon") || "fa fa-home");
+  const [activeCat, setActiveCat] = useState(localStorage.getItem("activeCat") || "Home");
+  const [category, setCategory] = useState(Data[0].inside);
+
   let ClickedIcon = (iconName) => {
+    console.log(iconName.inside)
     if (iconName.icon === activeIcon) {
       dispatch({ type: "SET_TOGGLE", payload: !state.toggle });
+
     } else {
       dispatch({ type: "SET_TOGGLE", payload: true });
       setActiveIcon(iconName.icon);
+      setActiveCat(iconName.inside[0].text); // Assuming first item is default active
+      setCategory(iconName.inside);
+      // Update localStorage
+      localStorage.setItem("activeIcon", iconName.icon);
+      localStorage.setItem("activeCat", iconName.inside[0].text);
     }
-    setCategory(iconName.inside);
-    setActiveCat(iconName.inside[0].text);
   };
-  return (
+  useEffect(() => {
+    // Ensure that the category is updated on page load if localStorage has values
+    const storedIcon = localStorage.getItem("activeIcon");
+    if (storedIcon) {
+      const foundIcon = Data.find(icon => icon.icon === storedIcon);
+      if (foundIcon) {
+        setCategory(foundIcon.inside);
+      }
+    }
+  }, []);
+  return(
     <div className={`${state.toggleNavbar ? "block" : "hidden"} relative top-[76px]`}>
       <div
         onClick={() => {
@@ -57,6 +73,7 @@ const Sidebar = () => {
                 to={`/admin-dashboard/${url}`}
                 onClick={() => {
                   setActiveCat(text);
+                   localStorage.setItem("activeCat", text);
                 }}
                 key={index}
                 className={`self-stretch duration-300 cursor-pointer px-[18px] ${

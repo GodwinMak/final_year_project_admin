@@ -18,16 +18,15 @@ export const useLogin =() =>{
                 localStorage.setItem(
                   "user",
                   JSON.stringify({
-                    username: res.data.username,
-                    role: res.data.role,
+                    user: res.data
                   })
                 );
                 authDispatch({
                   type: "LOGIN",
-                  payload: { username: res.data.username, role: res.data.role },
+                  payload: { user: res.data },
                 });
                 setIsLoading(false);
-                window.location = "/admin-dashboard/view_users";
+                window.location = "/admin-dashboard/welcome";
             })
         } catch (error) {
             setIsLoading(false)
