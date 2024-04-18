@@ -30,7 +30,7 @@ export const useLogin =() =>{
             })
         } catch (error) {
             setIsLoading(false)
-            setError(error);
+            setError(error.response.data);
         }
 
         
