@@ -1,15 +1,30 @@
 export const Data = [
     {
-    icon: "fa fa-home",
-    inside: [
-      {
-        icon: 'fa fa-home',
-        text: 'Home',
-        url: 'welcome'
-      }
-    ]
+        specialInsideSidebar: false,
+        insideSidebar: false,
+        icon: "fa fa-home",
+        inside: [
+            {
+                text: 'Home',
+                url: 'welcome'
+            }
+        ]
     },
     {
+        specialInsideSidebar: true,
+        insideSidebar: true,
+        icon: "fa fa-wifi",
+        inside: [
+            {
+                url: 'real_time',
+                text: 'RealTime'
+            }
+        ]
+    },
+    {
+        specialInsideSidebar: false,
+        insideSidebar: true,
+
         icon: 'fa-solid fa-user',
         inside: [
             {
@@ -25,6 +40,9 @@ export const Data = [
         ]
     },
     {
+        specialInsideSidebar: false,
+        insideSidebar: true,
+
         icon: 'fa-solid fa-globe',
         inside: [
             {
@@ -40,12 +58,15 @@ export const Data = [
         ]
     },
     {
+        specialInsideSidebar: false,
+        insideSidebar: true,
+
         icon: 'fa-solid fa-paw',
         inside: [
             {
-              icon: 'fa-solid fa-plus',
-              text: 'Add Animal',
-              url: 'add_animal'
+                icon: 'fa-solid fa-plus',
+                text: 'Add Animal',
+                url: 'add_animal'
             },
             {
                 icon: 'fa-solid fa-hippo',
@@ -55,6 +76,9 @@ export const Data = [
         ]
     },
     {
+        specialInsideSidebar: false,
+        insideSidebar: true,
+
         icon: 'fa-solid fa-calendar-days',
         inside: [
             {
@@ -65,6 +89,8 @@ export const Data = [
         ]
     },
     {
+        specialInsideSidebar: false,
+        insideSidebar: true,
         icon: 'fa-solid fa-gear',
         inside: [
             {
@@ -76,207 +102,225 @@ export const Data = [
     }
 ]
 
-export const stores = {
-  type: "FeatureCollection",
-  features: [
+export const DummyAnimalData = [
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.034084142948, 38.909671288923],
-      },
-      properties: {
-        phoneFormatted: "(202) 234-7336",
-        phone: "2022347336",
-        address: "1471 P St NW",
-        city: "Washington DC",
-        country: "United States",
-        crossStreet: "at 15th St NW",
-        postalCode: "20005",
-        state: "D.C.",
-      },
+        "animal_name": "Elephant_7426",
+        "animal_sex": "Female",
+        "animal_age": 21,
+        "animal_birthDay": "1995-12-25",
+        "battery_status": "28%",
+        "current_location": [
+            -2.46766,
+            35.72915
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.049766, 38.900772],
-      },
-      properties: {
-        phoneFormatted: "(202) 507-8357",
-        phone: "2025078357",
-        address: "2221 I St NW",
-        city: "Washington DC",
-        country: "United States",
-        crossStreet: "at 22nd St NW",
-        postalCode: "20037",
-        state: "D.C.",
-      },
+        "animal_name": "Elephant_7205",
+        "animal_sex": "Female",
+        "animal_age": 28,
+        "animal_birthDay": "2012-12-29",
+        "battery_status": "11%",
+        "current_location": [
+            -1.86457,
+            34.89329
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.043929, 38.910525],
-      },
-      properties: {
-        phoneFormatted: "(202) 387-9338",
-        phone: "2023879338",
-        address: "1512 Connecticut Ave NW",
-        city: "Washington DC",
-        country: "United States",
-        crossStreet: "at Dupont Circle",
-        postalCode: "20036",
-        state: "D.C.",
-      },
+        "animal_name": "Elephant_6199",
+        "animal_sex": "Male",
+        "animal_age": 10,
+        "animal_birthDay": "1990-11-26",
+        "battery_status": "75%",
+        "current_location": [
+            -1.87781,
+            34.87775
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.0672, 38.90516896],
-      },
-      properties: {
-        phoneFormatted: "(202) 337-9338",
-        phone: "2023379338",
-        address: "3333 M St NW",
-        city: "Washington DC",
-        country: "United States",
-        crossStreet: "at 34th St NW",
-        postalCode: "20007",
-        state: "D.C.",
-      },
+        "animal_name": "Elephant_8285",
+        "animal_sex": "Female",
+        "animal_age": 13,
+        "animal_birthDay": "1999-08-19",
+        "battery_status": "52%",
+        "current_location": [
+            -1.09536,
+            35.61587
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.002583742142, 38.887041080933],
-      },
-      properties: {
-        phoneFormatted: "(202) 547-9338",
-        phone: "2025479338",
-        address: "221 Pennsylvania Ave SE",
-        city: "Washington DC",
-        country: "United States",
-        crossStreet: "btwn 2nd & 3rd Sts. SE",
-        postalCode: "20003",
-        state: "D.C.",
-      },
+        "animal_name": "Elephant_8222",
+        "animal_sex": "Female",
+        "animal_age": 19,
+        "animal_birthDay": "2007-11-13",
+        "battery_status": "26%",
+        "current_location": [
+            -1.37099,
+            34.81105
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-76.933492720127, 38.99225245786],
-      },
-      properties: {
-        address: "8204 Baltimore Ave",
-        city: "College Park",
-        country: "United States",
-        postalCode: "20740",
-        state: "MD",
-      },
+        "animal_name": "Lion_3911",
+        "animal_sex": "Male",
+        "animal_age": 19,
+        "animal_birthDay": "2010-04-06",
+        "battery_status": "46%",
+        "current_location": [
+            -1.97662,
+            35.62995
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.097083330154, 38.980979],
-      },
-      properties: {
-        phoneFormatted: "(301) 654-7336",
-        phone: "3016547336",
-        address: "4831 Bethesda Ave",
-        cc: "US",
-        city: "Bethesda",
-        country: "United States",
-        postalCode: "20814",
-        state: "MD",
-      },
+        "animal_name": "Lion_5797",
+        "animal_sex": "Female",
+        "animal_age": 2,
+        "animal_birthDay": "1994-06-11",
+        "battery_status": "25%",
+        "current_location": [
+            -1.86269,
+            34.72312
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.359425054188, 38.958058116661],
-      },
-      properties: {
-        phoneFormatted: "(571) 203-0082",
-        phone: "5712030082",
-        address: "11935 Democracy Dr",
-        city: "Reston",
-        country: "United States",
-        crossStreet: "btw Explorer & Library",
-        postalCode: "20190",
-        state: "VA",
-      },
+        "animal_name": "Lion_2806",
+        "animal_sex": "Female",
+        "animal_age": 30,
+        "animal_birthDay": "1999-08-08",
+        "battery_status": "84%",
+        "current_location": [
+            -1.22057,
+            35.48168
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.10853099823, 38.880100922392],
-      },
-      properties: {
-        phoneFormatted: "(703) 522-2016",
-        phone: "7035222016",
-        address: "4075 Wilson Blvd",
-        city: "Arlington",
-        country: "United States",
-        crossStreet: "at N Randolph St.",
-        postalCode: "22203",
-        state: "VA",
-      },
+        "animal_name": "Lion_5726",
+        "animal_sex": "Female",
+        "animal_age": 3,
+        "animal_birthDay": "2013-11-01",
+        "battery_status": "24%",
+        "current_location": [
+            -2.49583,
+            35.4754
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-75.28784, 40.008008],
-      },
-      properties: {
-        phoneFormatted: "(610) 642-9400",
-        phone: "6106429400",
-        address: "68 Coulter Ave",
-        city: "Ardmore",
-        country: "United States",
-        postalCode: "19003",
-        state: "PA",
-      },
+        "animal_name": "Lion_8214",
+        "animal_sex": "Male",
+        "animal_age": 15,
+        "animal_birthDay": "2014-02-07",
+        "battery_status": "84%",
+        "current_location": [
+            -2.07275,
+            34.86179
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-75.20121216774, 39.954030175164],
-      },
-      properties: {
-        phoneFormatted: "(215) 386-1365",
-        phone: "2153861365",
-        address: "3925 Walnut St",
-        city: "Philadelphia",
-        country: "United States",
-        postalCode: "19104",
-        state: "PA",
-      },
+        "animal_name": "WildBeast_3260",
+        "animal_sex": "Female",
+        "animal_age": 15,
+        "animal_birthDay": "1994-09-17",
+        "battery_status": "65%",
+        "current_location": [
+            -1.12076,
+            35.9104
+        ]
     },
     {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [-77.043959498405, 38.903883387232],
-      },
-      properties: {
-        phoneFormatted: "(202) 331-3355",
-        phone: "2023313355",
-        address: "1901 L St. NW",
-        city: "Washington DC",
-        country: "United States",
-        crossStreet: "at 19th St",
-        postalCode: "20036",
-        state: "D.C.",
-      },
+        "animal_name": "WildBeast_878",
+        "animal_sex": "Male",
+        "animal_age": 30,
+        "animal_birthDay": "2011-08-30",
+        "battery_status": "69%",
+        "current_location": [
+            -1.87378,
+            35.44149
+        ]
     },
-  ],
-};
+    {
+        "animal_name": "WildBeast_5063",
+        "animal_sex": "Male",
+        "animal_age": 29,
+        "animal_birthDay": "2004-10-25",
+        "battery_status": "91%",
+        "current_location": [
+            -2.47037,
+            34.71763
+        ]
+    },
+    {
+        "animal_name": "WildBeast_8897",
+        "animal_sex": "Female",
+        "animal_age": 14,
+        "animal_birthDay": "2020-04-23",
+        "battery_status": "76%",
+        "current_location": [
+            -2.00411,
+            34.93418
+        ]
+    },
+    {
+        "animal_name": "WildBeast_5660",
+        "animal_sex": "Male",
+        "animal_age": 27,
+        "animal_birthDay": "1994-12-11",
+        "battery_status": "44%",
+        "current_location": [
+            -1.74155,
+            35.04874
+        ]
+    },
+    {
+        "animal_name": "Rhino_4108",
+        "animal_sex": "Female",
+        "animal_age": 18,
+        "animal_birthDay": "1991-03-25",
+        "battery_status": "45%",
+        "current_location": [
+            -1.71577,
+            35.37187
+        ]
+    },
+    {
+        "animal_name": "Rhino_1145",
+        "animal_sex": "Male",
+        "animal_age": 30,
+        "animal_birthDay": "2003-02-22",
+        "battery_status": "67%",
+        "current_location": [
+            -2.42466,
+            35.69506
+        ]
+    },
+    {
+        "animal_name": "Rhino_7225",
+        "animal_sex": "Female",
+        "animal_age": 4,
+        "animal_birthDay": "2003-09-04",
+        "battery_status": "54%",
+        "current_location": [
+            -1.81577,
+            35.77766
+        ]
+    },
+    {
+        "animal_name": "Rhino_4675",
+        "animal_sex": "Female",
+        "animal_age": 8,
+        "animal_birthDay": "2017-01-10",
+        "battery_status": "71%",
+        "current_location": [
+            -2.33432,
+            34.9214
+        ]
+    },
+    {
+        "animal_name": "Rhino_1975",
+        "animal_sex": "Male",
+        "animal_age": 24,
+        "animal_birthDay": "2022-08-29",
+        "battery_status": "34%",
+        "current_location": [
+            -1.14925,
+            35.87738
+        ]
+    }
+]

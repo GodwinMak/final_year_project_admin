@@ -57,7 +57,7 @@ const AddUser = () => {
           role,
           area_id: area.area_id
         }
-      ).then(()=>{
+      ).then((res)=>{
         navigate("/admin-dashboard/view_users");
       })
 

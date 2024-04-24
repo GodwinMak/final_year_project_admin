@@ -16,11 +16,13 @@ import DownloadBtn from "../../utils/DownloadBtn";
 import axios from "axios";
 import { Radio } from "@material-tailwind/react";
 import Datepicker from "flowbite-datepicker/Datepicker";
-
+import { useNavigate } from "react-router-dom";
+import {useAnimalContext} from "../../hooks/useAnimalContext"
 
 
 const Animal_List = () => {
 
+  const navigate = useNavigate()
   const columnHelper = createColumnHelper();
   const [animalToEdit, setAnimalToEdit] = useState(null);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
@@ -28,6 +30,7 @@ const Animal_List = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [areaNames, setAreaNames] = useState([]);
 
+  const {dispatch} = useAnimalContext()
   
 
   useEffect(() => {
@@ -86,7 +89,7 @@ const Animal_List = () => {
     try {
       // Update the user data using the endpoint http://localhost/api/users/:id
       await axios.put(
-        `https://apiv2.at.patrickmamsery.co.tz/api/users/${animalToEdit.user_id}`,
+        `https://apiv2.at.patrickmamsery.co.tz/api/animals/${animalToEdit.user_id}`,
         updatedUserData
       );
 
@@ -128,6 +131,8 @@ const Animal_List = () => {
   };
    const handleViewAnimal = (animal) =>{
     console.log(animal)
+     dispatch({type: "SET_ANIMAL_DATA", payload: animal})
+     navigate("/admin-dashboard/view_animal")
    }
 
   const columns = [
@@ -214,7 +219,6 @@ const Animal_List = () => {
           ...animal,
           age: calculateAge(animal.animal_birthDay)
         }));
-        console.log(animalsWithAge)
         setTableData(animalsWithAge);
         setMeta(responseMeta);
       } catch (error) {
@@ -231,7 +235,7 @@ const Animal_List = () => {
         new Datepicker(datepickerEl, {});
     }
   }, [isEditModalVisible]);
-  
+
   return (
     <div className="mt-8  p-6 mb-6 bg-slate-50 min-h-sreen w-full md:container md:mx-auto relative overflow-x-auto  shadow-md sm-rounded-lg">
       <div className="p-2 max-w-5xl mx-auto   fill-gray-400">

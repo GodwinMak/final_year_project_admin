@@ -13,10 +13,15 @@ import AreaMap from '../../components/admin-areas/AreaMap';
 import ChangePassword from '../../components/admin-settings/ChangePassword';
 import Welcome from '../Welcome';
 import AddAnimal from '../../components/admin_animal/AddAnimal';
+import ViewAnimal from '../../components/admin_animal/ViewAnimal';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import RealTimeMap from '../../components/Map/RealTimeMap';
 
 const AdminDashboard = () => {
   let { state, dispatch } = useContext(Context);
   const {category} = useParams();
+  const user = useAuthContext()
+
 
   let [size, setSize] = useState(1000)
   window.addEventListener('resize', (e) => {
@@ -41,17 +46,23 @@ const AdminDashboard = () => {
               : ` ${state.toggleNavbar ? "md:ml-[90px]" : "ml-0"}`
           }  w-full  z-10 mt-[76px]`}
         >
-          {category  === "welcome" && <Welcome/>}
-          {category === "add_user" && <AddUser />}
-          {category === "view_users" && <ViewUsers />}
-          {category === "edit_user" && <AddUser />}
-          {category === "add_area" && <AddArea />}
-          {category === "view_areas" && <Areas />}
-          {category === "area_map" && <AreaMap />}
-          {category === "add_animal" && <AddAnimal/>}
-          {category === "view_animals" && <AnimalList />}
-          {category === "events_reports" && <Reports />}
-          {category === "change_password" && <ChangePassword/>}
+          {user && user.user.user.user.role === "admin"  && (
+            <>
+              {category === "welcome" && <Welcome />}
+              {category === "add_user" && <AddUser />}
+              {category === "view_users" && <ViewUsers />}
+              {category === "edit_user" && <AddUser />}
+              {category === "add_area" && <AddArea />}
+              {category === "view_areas" && <Areas />}
+              {category === "area_map" && <AreaMap />}
+              {category === "add_animal" && <AddAnimal />}
+              {category === "view_animals" && <AnimalList />}
+              {category === "events_reports" && <Reports />}
+              {category === "view_animal" && <ViewAnimal />}
+            </>
+          )}
+          {category === "change_password" && <ChangePassword />}
+          {category === "real_time" && <RealTimeMap/>}
         </div>
       </div>
     </div>

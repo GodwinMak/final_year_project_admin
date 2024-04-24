@@ -2,27 +2,69 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../context";
 import { Link } from "react-router-dom";
 import { Data } from "../../data/jummy";
+import { useNavigate } from "react-router-dom";
+import RealTimeSidebar from "./RealTimeSidebar";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useContext(Context);
   const [activeIcon, setActiveIcon] = useState(localStorage.getItem("activeIcon") || "fa fa-home");
   const [activeCat, setActiveCat] = useState(localStorage.getItem("activeCat") || "Home");
   const [category, setCategory] = useState(Data[0].inside);
+  const [specialInsideSidebar, setSpecialInsideSidebar] = useState(localStorage.getItem("specialInsideSidebar") === "true")
+  const [insideSidebar, setInsideSidebar] = useState(localStorage.getItem("insideSidebar") === "true")
 
+
+  console.log(insideSidebar, specialInsideSidebar)
   let ClickedIcon = (iconName) => {
-    console.log(iconName.inside)
-    if (iconName.icon === activeIcon) {
-      dispatch({ type: "SET_TOGGLE", payload: !state.toggle });
+    if (iconName.insideSidebar) {   
+      setInsideSidebar(true)
+      localStorage.setItem("insideSidebar", true)
+      if (!iconName.specialInsideSidebar) {
+        setSpecialInsideSidebar(false)
+        localStorage.setItem("specialInsideSidebar", false)
+        if (iconName.icon === activeIcon) {
+          dispatch({ type: "SET_TOGGLE", payload: !state.toggle });
 
+        } else {
+          dispatch({ type: "SET_TOGGLE", payload: true });
+          navigate(`/admin-dashboard/${iconName.inside[0].url}`)
+          setActiveIcon(iconName.icon);
+          setActiveCat(iconName.inside[0].text); // Assuming first item is default active
+          setCategory(iconName.inside);
+          // Update localStorage
+          localStorage.setItem("activeIcon", iconName.icon);
+          localStorage.setItem("activeCat", iconName.inside[0].text);
+        }
+      } else {
+        setSpecialInsideSidebar(true);
+        localStorage.setItem("specialInsideSidebar", true)
+        if (iconName.icon === activeIcon) {
+          dispatch({ type: "SET_TOGGLE", payload: !state.toggle });
+        } else {
+          dispatch({ type: "SET_TOGGLE", payload: true });
+          navigate(`/admin-dashboard/${iconName.inside[0].url}`)
+          setActiveIcon(iconName.icon);
+          setActiveCat(iconName.inside[0].text); // Assuming first item is default active
+          localStorage.setItem("activeIcon", iconName.icon);
+          localStorage.setItem("activeCat", iconName.inside[0].text);
+
+        }
+      }
     } else {
-      dispatch({ type: "SET_TOGGLE", payload: true });
-      setActiveIcon(iconName.icon);
-      setActiveCat(iconName.inside[0].text); // Assuming first item is default active
-      setCategory(iconName.inside);
-      // Update localStorage
-      localStorage.setItem("activeIcon", iconName.icon);
-      localStorage.setItem("activeCat", iconName.inside[0].text);
+      setInsideSidebar(false);
+      localStorage.setItem("insideSidebar", false);
+      dispatch({ type: "SET_TOGGLE", payload: false });
+      if (iconName.icon === activeIcon){
+        return
+      }else{
+        navigate(`/admin-dashboard/${iconName.inside[0].url}`)
+        setActiveIcon(iconName.icon);
+        localStorage.setItem("activeIcon", iconName.icon);
+      }
     }
+
+
   };
   useEffect(() => {
     // Ensure that the category is updated on page load if localStorage has values
@@ -34,7 +76,7 @@ const Sidebar = () => {
       }
     }
   }, []);
-  return(
+  return (
     <div className={`${state.toggleNavbar ? "block" : "hidden"} relative top-[76px]`}>
       <div
         onClick={() => {
@@ -51,57 +93,54 @@ const Sidebar = () => {
                 onClick={() => {
                   ClickedIcon(icon);
                 }}
-                className={`p-3.5 cursor-pointer ${
-                  activeIcon === icon.icon
-                    ? " text-white bg-gradient-to-bl from-amber-500 to-pink-500"
-                    : "text-neutral-400"
-                }  rounded-lg flex-col hover:text-white duration-300 justify-start items-center gap-2 flex`}
+                className={`p-3.5 cursor-pointer ${activeIcon === icon.icon
+                  ? " text-white bg-gradient-to-bl from-amber-500 to-pink-500"
+                  : "text-neutral-400"
+                  }  rounded-lg flex-col hover:text-white duration-300 justify-start items-center gap-2 flex`}
               >
                 <i className={`${icon.icon} text-xl w-6 h-6 text-center `}></i>
               </div>
             );
           })}
         </div>
-        <div
-          className={`w-56 ${
-            state.toggle ? "block" : "hidden"
-          } h-full overflow-hidden md:overflow-auto py-6 bg-white border-r border-neutral-200 flex-col justify-start items-start gap-4 inline-flex`}
-        >
-          {category.map(({ text, icon, url }, index) => {
-            return (
-              <Link
-                to={`/admin-dashboard/${url}`}
-                onClick={() => {
-                  setActiveCat(text);
-                   localStorage.setItem("activeCat", text);
-                }}
-                key={index}
-                className={`self-stretch duration-300 cursor-pointer px-[18px] ${
-                  activeCat === text
+        {insideSidebar ? ( !specialInsideSidebar ? (
+          <div
+            className={`w-56 ${state.toggle ? "block" : "hidden"
+              } h-full overflow-hidden md:overflow-auto py-6 bg-white border-r border-neutral-200 flex-col justify-start items-start gap-4 inline-flex`}
+          >
+            {category && category.map(({ text, icon, url }, index) => {
+              return (
+                <Link
+                  to={`/admin-dashboard/${url}`}
+                  onClick={() => {
+                    setActiveCat(text);
+                    localStorage.setItem("activeCat", text);
+                  }}
+                  key={index}
+                  className={`self-stretch duration-300 cursor-pointer px-[18px] ${activeCat === text
                     ? " bg-orange-50 bg-opacity-80 border-r-2 border-orange-600 "
                     : "text-zinc-500 hover:bg-neutral-200"
-                } py-3.5 justify-start items-center gap-3 inline-flex`}
-              >
-                <div
-                  className={`w-6 relative ${
-                    activeCat === text ? "text-orange-600" : "text-zinc-500"
-                  } text-xl`}
+                    } py-3.5 justify-start items-center gap-3 inline-flex`}
                 >
-                  <i className={`${icon}`}></i>
-                </div>
-                <div
-                  className={`grow shrink basis-0 ${
-                    activeCat === text
+                  <div
+                    className={`w-6 relative ${activeCat === text ? "text-orange-600" : "text-zinc-500"
+                      } text-xl`}
+                  >
+                    <i className={`${icon}`}></i>
+                  </div>
+                  <div
+                    className={`grow shrink basis-0 ${activeCat === text
                       ? "text-orange-600 font-semibold"
                       : "text-zinc-500  font-normal"
-                  } text-sm leading-tight`}
-                >
-                  {text}
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                      } text-sm leading-tight`}
+                  >
+                    {text}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>) : (<RealTimeSidebar />)) : null}
+
       </div>
     </div>
   );

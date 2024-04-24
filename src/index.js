@@ -8,6 +8,7 @@ import Provider from "./context";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import { AuthContextProvider } from "./context/AuthContext";
 import { AreaContextProvider } from "./context/AreaContext";
+import { AnimalContextProvider } from "./context/AnimalContext";
 import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,7 +18,9 @@ root.render(
       <AuthContextProvider>
         <Provider>
           <AreaContextProvider>
-            <App />
+          <AnimalContextProvider>
+              <App />
+          </AnimalContextProvider>
           </AreaContextProvider>
         </Provider>
       </AuthContextProvider>
