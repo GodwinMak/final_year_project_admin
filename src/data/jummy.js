@@ -2,6 +2,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: false,
+        previllage: 'admin',
         icon: "fa fa-home",
         inside: [
             {
@@ -13,6 +14,7 @@ export const Data = [
     {
         specialInsideSidebar: true,
         insideSidebar: true,
+        previllage: 'all',
         icon: "fa fa-wifi",
         inside: [
             {
@@ -24,7 +26,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-
+        previllage: 'admin',
         icon: 'fa-solid fa-user',
         inside: [
             {
@@ -42,7 +44,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-
+        previllage: 'admin',
         icon: 'fa-solid fa-globe',
         inside: [
             {
@@ -60,7 +62,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-
+        previllage: 'admin',
         icon: 'fa-solid fa-paw',
         inside: [
             {
@@ -78,7 +80,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-
+        previllage: 'admin',
         icon: 'fa-solid fa-calendar-days',
         inside: [
             {
@@ -90,7 +92,19 @@ export const Data = [
     },
     {
         specialInsideSidebar: false,
+        insideSidebar: false,
+        previllage: 'user',
+        icon: "fa fa-bar-chart",
+        inside:[
+            {
+                url: "statistics"
+            }
+        ]
+    },
+    {
+        specialInsideSidebar: false,
         insideSidebar: true,
+        previllage: 'all',
         icon: 'fa-solid fa-gear',
         inside: [
             {

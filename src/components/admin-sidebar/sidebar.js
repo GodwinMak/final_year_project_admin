@@ -4,8 +4,25 @@ import { Link } from "react-router-dom";
 import { Data } from "../../data/jummy";
 import { useNavigate } from "react-router-dom";
 import RealTimeSidebar from "./RealTimeSidebar";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Sidebar = () => {
+
+  const user = useAuthContext()
+
+
+  const filteredData = Data.filter(icon => {
+    console.log(icon.previllage)
+    if (user.user.user.user.role === 'admin' && (icon.previllage === 'admin' || icon.previllage === 'all')) {
+      return true;
+    } else if (user.user.user.user.role === 'user' && (icon.previllage === 'user' || icon.previllage === 'all')) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+
   const navigate = useNavigate();
   const { state, dispatch } = useContext(Context);
   const [activeIcon, setActiveIcon] = useState(localStorage.getItem("activeIcon") || "fa fa-home");
@@ -86,7 +103,7 @@ const Sidebar = () => {
       ></div>
       <div className="h-full z-50 fixed drop-shadow-2xl md:drop-shadow flex">
         <div className="flex-col overflow-hidden md:overflow-auto justify-start items-start gap-4 flex bg-zinc-900 px-4 py-6 min-h-full">
-          {Data.map((icon, index) => {
+          {filteredData.map((icon, index) => {
             return (
               <div
                 key={index}
@@ -102,6 +119,7 @@ const Sidebar = () => {
               </div>
             );
           })}
+
         </div>
         {insideSidebar ? ( !specialInsideSidebar ? (
           <div
