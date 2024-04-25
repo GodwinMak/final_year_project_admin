@@ -97,7 +97,7 @@ export const Data = [
         icon: "fa fa-bar-chart",
         inside:[
             {
-                url: "statistics"
+                url: "history"
             }
         ]
     },

@@ -16,6 +16,7 @@ import AddAnimal from '../../components/admin_animal/AddAnimal';
 import ViewAnimal from '../../components/admin_animal/ViewAnimal';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import RealTimeMap from '../../components/Map/RealTimeMap';
+import History from '../../components/Map/History';
 
 const AdminDashboard = () => {
   let { state, dispatch } = useContext(Context);
@@ -63,6 +64,13 @@ const AdminDashboard = () => {
           )}
           {category === "change_password" && <ChangePassword />}
           {category === "real_time" && <RealTimeMap/>}
+          {
+            user && user.user.user.user.role === "user" && (
+              <>
+                {category === "history" && <History/>}
+              </>
+            )
+          }
         </div>
       </div>
     </div>

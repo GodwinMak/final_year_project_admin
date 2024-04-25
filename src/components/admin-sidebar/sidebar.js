@@ -23,10 +23,11 @@ const Sidebar = () => {
   });
 
 
+
   const navigate = useNavigate();
   const { state, dispatch } = useContext(Context);
-  const [activeIcon, setActiveIcon] = useState(localStorage.getItem("activeIcon") || "fa fa-home");
-  const [activeCat, setActiveCat] = useState(localStorage.getItem("activeCat") || "Home");
+  const [activeIcon, setActiveIcon] = useState(localStorage.getItem("activeIcon") || filteredData[0].icon);
+  const [activeCat, setActiveCat] = useState(localStorage.getItem("activeCat") || filteredData[0].inside[0].text);
   const [category, setCategory] = useState(Data[0].inside);
   const [specialInsideSidebar, setSpecialInsideSidebar] = useState(localStorage.getItem("specialInsideSidebar") === "true")
   const [insideSidebar, setInsideSidebar] = useState(localStorage.getItem("insideSidebar") === "true")
