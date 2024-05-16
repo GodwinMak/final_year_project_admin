@@ -11,6 +11,7 @@ import AddUser from '../../components/admin-users/AddUser';
 import AnimalList from '../../components/admin_animal/Animal_List';
 import AreaMap from '../../components/admin-areas/AreaMap';
 import ChangePassword from '../../components/admin-settings/ChangePassword';
+import Profile from "../../components/admin-settings/Profile"
 import Welcome from '../Welcome';
 import AddAnimal from '../../components/admin_animal/AddAnimal';
 import ViewAnimal from '../../components/admin_animal/ViewAnimal';
@@ -64,6 +65,7 @@ const AdminDashboard = () => {
           )}
           {category === "change_password" && <ChangePassword />}
           {category === "real_time" && <RealTimeMap/>}
+          {category === "profile" && <Profile/>}
           {
             user && user.user.user.user.role === "user" && (
               <>

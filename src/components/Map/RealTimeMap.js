@@ -3,6 +3,7 @@ import DeckGl from "deck.gl";
 import Map from "react-map-gl";
 
 const RealTimeMap = () => {
+   
     return (
         <div className='fixed left-0'>
             <DeckGl

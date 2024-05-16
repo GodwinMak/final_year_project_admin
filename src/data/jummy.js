@@ -30,14 +30,14 @@ export const Data = [
         icon: 'fa-solid fa-user',
         inside: [
             {
-                icon: 'fa-solid fa-user-plus',
-                text: 'Add User',
-                url: 'add_user'
-            },
-            {
                 icon: 'fa-solid fa-eye',
                 text: 'View Users',
                 url: 'view_users'
+            },
+            {
+                icon: 'fa-solid fa-user-plus',
+                text: 'Add User',
+                url: 'add_user'
             },
         ]
     },
@@ -48,14 +48,14 @@ export const Data = [
         icon: 'fa-solid fa-globe',
         inside: [
             {
-                icon: 'fa-solid fa-plus',
-                text: 'Add Area',
-                url: 'add_area'
-            },
-            {
                 icon: 'fa-solid fa-eye',
                 text: 'View Areas',
                 url: 'view_areas'
+            },
+            {
+                icon: 'fa-solid fa-plus',
+                text: 'Add Area',
+                url: 'add_area'
             }
         ]
     },
@@ -66,14 +66,14 @@ export const Data = [
         icon: 'fa-solid fa-paw',
         inside: [
             {
-                icon: 'fa-solid fa-plus',
-                text: 'Add Animal',
-                url: 'add_animal'
-            },
-            {
                 icon: 'fa-solid fa-hippo',
                 text: 'List of Animals',
                 url: 'view_animals'
+            },
+            {
+                icon: 'fa-solid fa-plus',
+                text: 'Add Animal',
+                url: 'add_animal'
             }
         ]
     },
@@ -107,6 +107,11 @@ export const Data = [
         previllage: 'all',
         icon: 'fa-solid fa-gear',
         inside: [
+            {
+                icon: "fa-solid fa-user",
+                text: "Profile",
+                url: "profile"
+            },
             {
                 icon: 'fa-solid fa-lock',
                 text: 'Change Password',

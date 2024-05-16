@@ -1,9 +1,30 @@
 import React, { useContext, useState } from 'react'
 import { Context } from "../../context";
-import { DummyAnimalData } from '../../data/jummy';
-
+import { RealTimeContext } from "../../context/RealTimeContext"
 
 const RealTimeSidebar = () => {
+  const { state: animalState} = React.useContext(RealTimeContext)
+  console.log(animalState)
+
+  const animalData = animalState.RealTimeData.map((objt) => {
+    const data2 = animalState.color.find(objt2 => objt2.id === objt.animal_TagId);
+
+    const date = new Date(objt.animal_birthDay);
+    const formattedDate = date.toISOString().split('T')[0];
+    const birthDate = new Date(formattedDate);
+    const currentDate = new Date();
+
+    // Calculate the difference in milliseconds between the two dates
+    const timeDifference = currentDate - birthDate;
+
+    // Convert milliseconds to years
+    const ageInMilliseconds = new Date(timeDifference);
+    const age = Math.abs(ageInMilliseconds.getUTCFullYear() - 1970);
+
+    return data2 ? { id: objt.animal_TagId, data: objt.animalLocations[0].animal_location, battery: objt.animalLocations[0].device_status, name: objt.animal_name, birthday: formattedDate, animal_sex: objt.animal_sex, age: age, color: `rgb(${data2.color[0]}, ${data2.color[1]}, ${data2.color[2]})` } : null;
+  })
+
+  console.log(animalData)
   const { state } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
 
@@ -13,16 +34,17 @@ const RealTimeSidebar = () => {
   };
 
   // Filtered animal data based on search term
-  const filteredAnimalData = DummyAnimalData.filter((animal) =>
-    animal.animal_name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+  const filteredData = animalData && animalData.filter((animal) => 
+    animal.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div
       className={`w-[26rem] ${state.toggle ? "block" : "hidden"
         } bg-gray-300 h-full overflow-hidden md:overflow-auto py-6 bg-white border-r border-neutral-200 flex-col justify-start items-start gap-4 inline-flex bg-gray-100 pl-4 pr-2`}
     >
-      <div className=' flex flex-col  w-full'>
+      <div className=' flex flex-col  w-full mb-16'>
         <form className="w-full">
           <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -46,49 +68,49 @@ const RealTimeSidebar = () => {
 
         {searchTerm ? (
           // Render filtered animal data if search term exists
-          filteredAnimalData.map((data, index) => (
-            <div key={index} className="justify-between items-center w-full p-3.5 bg-gray-100 hover:bg-gray-300 rounded-lg  mt-2 border-2  border-transparent hover:border-orange-500">
-              <div className="flex flex-col">
-                <div className='flex flex-row gap-2' >
-                  <div>
-                    <h3 className="text-sm font-semibold">Animal Name: {data.animal_name}</h3>
-                    <p className="text-xs text-gray-500">Animal Age: {data.animal_age}</p>
-                    <h3 className='text-sm font-semibold'>Animal Sex: {data.animal_sex}</h3>
-                  </div>
-                  <div className="flex-grow"></div>
-                  <div className="w-28 h-12 bg-gray-400 rounded-none"></div>
-                </div>
-                <hr class="border-t border-gray-500 my-4"></hr>
-                <div>
-                  <h3 className='text-sm font-semibold'>Date birth: {data.animal_birthDay}</h3>
-                  <h3 className='text-sm font-semibold'>current Location: {data.current_location[1]} {data.current_location[0]}</h3>
-                  <h3 className='text-sm font-semibold'>Battery Status: {data.battery_status}</h3>
-                </div>
-                <div className='mt-3'>
-                  <button className='cursor-pointer bg-orange-500 rounded-full p-2'>Fly to Location</button>
-                </div>
-              </div>
-            </div>
+         filteredData && filteredData.map((data, index) => (
+           <div key={index} className="justify-between items-center w-full p-3.5 bg-gray-100 hover:bg-gray-300 rounded-lg  mt-2 border-2  border-transparent hover:border-orange-500">
+             <div className="flex flex-col">
+               <div className='flex flex-row gap-2' >
+                 <div>
+                   <h3 className="text-sm font-semibold">Animal Name: {data.name}</h3>
+                   <p className="text-xs text-gray-500">Animal Age: {data.age}</p>
+                   <h3 className='text-sm font-semibold'>Animal Sex: {data.animal_sex}</h3>
+                 </div>
+                 <div className="flex-grow"></div>
+                 <div className="w-28 h-12  rounded-none" style={{ background: data.color }}></div>
+               </div>
+               <hr class="border-t border-gray-500 my-4"></hr>
+               <div>
+                 <h3 className='text-sm font-semibold'>Date birth: {data.birthday}</h3>
+                 <h3 className='text-sm font-semibold'>current Location: {data.data.coordinates[1]} {data.data.coordinates[0]}</h3>
+                 <h3 className='text-sm font-semibold'>Battery Status: {data.battery}</h3>
+               </div>
+               <div className='mt-3'>
+                 <button className='cursor-pointer bg-orange-500 rounded-full p-2'>Fly to Location</button>
+               </div>
+             </div>
+           </div>
           ))
         ) : (
           // Render all dummy data if there's no search term
-          DummyAnimalData.map((data, index) => (
+          animalData.map((data, index) => (
             <div key={index} className="justify-between items-center w-full p-3.5 bg-gray-100 hover:bg-gray-300 rounded-lg  mt-2 border-2  border-transparent hover:border-orange-500">
               <div className="flex flex-col">
                 <div className='flex flex-row gap-2' >
                   <div>
-                    <h3 className="text-sm font-semibold">Animal Name: {data.animal_name}</h3>
-                    <p className="text-xs text-gray-500">Animal Age: {data.animal_age}</p>
+                    <h3 className="text-sm font-semibold">Animal Name: {data.name}</h3>
+                    <p className="text-xs text-gray-500">Animal Age: {data.age}</p>
                     <h3 className='text-sm font-semibold'>Animal Sex: {data.animal_sex}</h3>
                   </div>
                   <div className="flex-grow"></div>
-                  <div className="w-28 h-12 bg-gray-400 rounded-none"></div>
+                  <div className="w-28 h-12  rounded-none" style={{ background: data.color }}></div>
                 </div>
                 <hr class="border-t border-gray-500 my-4"></hr>
                 <div>
-                  <h3 className='text-sm font-semibold'>Date birth: {data.animal_birthDay}</h3>
-                  <h3 className='text-sm font-semibold'>current Location: {data.current_location[1]} {data.current_location[0]}</h3>
-                  <h3 className='text-sm font-semibold'>Battery Status: {data.battery_status}</h3>
+                  <h3 className='text-sm font-semibold'>Date birth: {data.birthday}</h3>
+                  <h3 className='text-sm font-semibold'>current Location: {data.data.coordinates[1]} {data.data.coordinates[0]}</h3>
+                  <h3 className='text-sm font-semibold'>Battery Status: {data.battery}</h3>
                 </div>
                 <div className='mt-3'>
                   <button className='cursor-pointer bg-orange-500 rounded-full p-2'>Fly to Location</button>

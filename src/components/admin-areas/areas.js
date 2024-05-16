@@ -20,6 +20,7 @@ const Areas = () => {
         await axios
           .get("https://apiv2.at.patrickmamsery.co.tz/api/areas/all")
           .then((res) => {
+            console.log(res.data)
             setAreas(res.data);
           });
 
