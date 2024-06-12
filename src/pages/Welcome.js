@@ -3,21 +3,13 @@ import React from 'react'
 
 const Welcome = () => {
   return (
-    <div
-      className=' flex flex-col  bg-gray-100'
-    >
+    <div className=" flex flex-col  bg-gray-100 ">
       <div className="p-3">
         <h2>Welcome To Animal Watch</h2>
         <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-          <div
-            className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7"
-          >
-            <div
-              className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-            >
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-              >
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7">
+            <div className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
                 <svg
                   className="fill-primary dark:fill-white"
                   width="22"
@@ -39,17 +31,13 @@ const Welcome = () => {
 
               <div className="mt-4 flex items-end justify-between">
                 <div>
-                  <h4
-                    className="text-title-md font-bold text-black dark:text-white"
-                  >
+                  <h4 className="text-title-md font-bold text-black dark:text-white">
                     $3.456K
                   </h4>
                   <span className="text-sm font-medium">Total views</span>
                 </div>
 
-                <span
-                  className="flex items-center gap-1 text-sm font-medium text-meta-3"
-                >
+                <span className="flex items-center gap-1 text-sm font-medium text-meta-3">
                   0.43%
                   <svg
                     className="fill-meta-3"
@@ -67,12 +55,8 @@ const Welcome = () => {
                 </span>
               </div>
             </div>
-            <div
-              className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-            >
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-              >
+            <div className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
                 <svg
                   className="fill-primary dark:fill-white"
                   width="20"
@@ -98,17 +82,13 @@ const Welcome = () => {
 
               <div className="mt-4 flex items-end justify-between">
                 <div>
-                  <h4
-                    className="text-title-md font-bold text-black dark:text-white"
-                  >
+                  <h4 className="text-title-md font-bold text-black dark:text-white">
                     $45,2K
                   </h4>
                   <span className="text-sm font-medium">Total Profit</span>
                 </div>
 
-                <span
-                  className="flex items-center gap-1 text-sm font-medium text-meta-3"
-                >
+                <span className="flex items-center gap-1 text-sm font-medium text-meta-3">
                   4.35%
                   <svg
                     className="fill-meta-3"
@@ -126,12 +106,8 @@ const Welcome = () => {
                 </span>
               </div>
             </div>
-            <div
-              className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-            >
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-              >
+            <div className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
                 <svg
                   className="fill-primary dark:fill-white"
                   width="22"
@@ -153,17 +129,13 @@ const Welcome = () => {
 
               <div className="mt-4 flex items-end justify-between">
                 <div>
-                  <h4
-                    className="text-title-md font-bold text-black dark:text-white"
-                  >
+                  <h4 className="text-title-md font-bold text-black dark:text-white">
                     2.450
                   </h4>
                   <span className="text-sm font-medium">Total Product</span>
                 </div>
 
-                <span
-                  className="flex items-center gap-1 text-sm font-medium text-meta-3"
-                >
+                <span className="flex items-center gap-1 text-sm font-medium text-meta-3">
                   2.59%
                   <svg
                     className="fill-meta-3"
@@ -181,12 +153,8 @@ const Welcome = () => {
                 </span>
               </div>
             </div>
-            <div
-              className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark"
-            >
-              <div
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4"
-              >
+            <div className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
                 <svg
                   className="fill-primary dark:fill-white"
                   width="22"
@@ -212,17 +180,13 @@ const Welcome = () => {
 
               <div className="mt-4 flex items-end justify-between">
                 <div>
-                  <h4
-                    class="text-title-md font-bold text-black dark:text-white"
-                  >
+                  <h4 class="text-title-md font-bold text-black dark:text-white">
                     3.456
                   </h4>
                   <span class="text-sm font-medium">Total Users</span>
                 </div>
 
-                <span
-                  class="flex items-center gap-1 text-sm font-medium text-meta-5"
-                >
+                <span class="flex items-center gap-1 text-sm font-medium text-meta-5">
                   0.95%
                   <svg
                     class="fill-meta-5"
@@ -242,10 +206,9 @@ const Welcome = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
 export default Welcome
