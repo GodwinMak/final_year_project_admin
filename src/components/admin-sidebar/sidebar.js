@@ -125,7 +125,7 @@ const Sidebar = () => {
           })}
 
         </div>
-        {insideSidebar ? ( !specialInsideSidebar ? (
+        {insideSidebar && ( !specialInsideSidebar ? (
           <div
             className={`w-56 ${state.toggle ? "block" : "hidden"
               } h-full overflow-hidden md:overflow-auto py-6 bg-white border-r border-neutral-200 flex-col justify-start items-start gap-4 inline-flex`}
@@ -161,8 +161,7 @@ const Sidebar = () => {
                 </Link>
               );
             })}
-          </div>) : ((page.category === "real_time" && <RealTimeSidebar /> )|| (page.category === "history" && <HistorySidebar/>))) : null}
-
+          </div>) : ((page.category === "real_time" && <RealTimeSidebar /> )|| (page.category === "history" && <HistorySidebar/>)))}
       </div>
     </div>
   );

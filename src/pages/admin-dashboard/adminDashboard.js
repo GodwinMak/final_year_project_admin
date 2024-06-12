@@ -23,7 +23,7 @@ const AdminDashboard = () => {
   let { state, dispatch } = useContext(Context);
   const {category} = useParams();
   const user = useAuthContext()
-
+  console.log(category)
 
   let [size, setSize] = useState(1000)
   window.addEventListener('resize', (e) => {
@@ -44,11 +44,17 @@ const AdminDashboard = () => {
         <div
           className={` ${
             state.toggle
-              ? ` ${state.toggleNavbar ? "md:ml-[310px]" : "ml-0 "}`
+              ? ` ${
+                  state.toggleNavbar
+                    ? category === "welcome"
+                      ? "md:ml-[90px]"
+                      : "md:ml-[310px]"
+                    : "ml-0 "
+                }`
               : ` ${state.toggleNavbar ? "md:ml-[90px]" : "ml-0"}`
           }  w-full  z-10 mt-[76px]`}
         >
-          {user && user.user.user.user.role === "admin"  && (
+          {user && user.user.user.user.role === "admin" && (
             <>
               {category === "welcome" && <Welcome />}
               {category === "add_user" && <AddUser />}
@@ -64,15 +70,11 @@ const AdminDashboard = () => {
             </>
           )}
           {category === "change_password" && <ChangePassword />}
-          {category === "real_time" && <RealTimeMap/>}
-          {category === "profile" && <Profile/>}
-          {
-            user && user.user.user.user.role === "user" && (
-              <>
-                {category === "history" && <History/>}
-              </>
-            )
-          }
+          {category === "real_time" && <RealTimeMap />}
+          {category === "profile" && <Profile />}
+          {user && user.user.user.user.role === "user" && (
+            <>{category === "history" && <History />}</>
+          )}
         </div>
       </div>
     </div>
