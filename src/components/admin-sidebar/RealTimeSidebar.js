@@ -3,8 +3,8 @@ import { Context } from "../../context";
 import { RealTimeContext } from "../../context/RealTimeContext"
 
 const RealTimeSidebar = () => {
-  const { state: animalState} = React.useContext(RealTimeContext)
-  console.log(animalState)
+  const { state: animalState, dispatch } = React.useContext(RealTimeContext)
+  
 
   const animalData = animalState.RealTimeData.map((objt) => {
     const data2 = animalState.color.find(objt2 => objt2.id === objt.animal_TagId);
@@ -24,7 +24,6 @@ const RealTimeSidebar = () => {
     return data2 ? { id: objt.animal_TagId, data: objt.animalLocations[0].animal_location, battery: objt.animalLocations[0].device_status, name: objt.animal_name, birthday: formattedDate, animal_sex: objt.animal_sex, age: age, color: `rgb(${data2.color[0]}, ${data2.color[1]}, ${data2.color[2]})` } : null;
   })
 
-  console.log(animalData)
   const { state } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
 
@@ -38,6 +37,12 @@ const RealTimeSidebar = () => {
   const filteredData = animalData && animalData.filter((animal) => 
     animal.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  const handleFlyToLocation = (coordinates) => {
+    // flyToLocation(coordinates);
+    console.log("object")
+    dispatch({ type: "SET_FLYTO", payload: coordinates })
+  };
 
   return (
     <div
@@ -87,7 +92,8 @@ const RealTimeSidebar = () => {
                  <h3 className='text-sm font-semibold'>Battery Status: {data.battery}</h3>
                </div>
                <div className='mt-3'>
-                 <button className='cursor-pointer bg-orange-500 rounded-full p-2'>Fly to Location</button>
+                 <button className='cursor-pointer bg-orange-500 rounded-full p-2' 
+                 onClick={() => handleFlyToLocation([data.data.coordinates[1] ,data.data.coordinates[0]])}>Fly to Location</button>
                </div>
              </div>
            </div>
@@ -113,7 +119,9 @@ const RealTimeSidebar = () => {
                   <h3 className='text-sm font-semibold'>Battery Status: {data.battery}</h3>
                 </div>
                 <div className='mt-3'>
-                  <button className='cursor-pointer bg-orange-500 rounded-full p-2'>Fly to Location</button>
+                  <button className='cursor-pointer bg-orange-500 rounded-full p-2'
+                    onClick={() => handleFlyToLocation([data.data.coordinates[1], data.data.coordinates[0]])}
+                  >Fly to Location</button>
                 </div>
               </div>
             </div>

@@ -2,13 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../context";
 import { Link } from "react-router-dom";
 import { Data } from "../../data/jummy";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RealTimeSidebar from "./RealTimeSidebar";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import HistorySidebar from "./HistorySidebar";
 
 const Sidebar = () => {
 
   const user = useAuthContext()
+  const page = useParams()
+  console.log(page)
 
 
   const filteredData = Data.filter(icon => {
@@ -158,7 +161,7 @@ const Sidebar = () => {
                 </Link>
               );
             })}
-          </div>) : (<RealTimeSidebar />)) : null}
+          </div>) : ((page.category === "real_time" && <RealTimeSidebar /> )|| (page.category === "history" && <HistorySidebar/>))) : null}
 
       </div>
     </div>

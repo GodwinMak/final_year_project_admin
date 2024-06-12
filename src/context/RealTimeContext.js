@@ -6,7 +6,8 @@ import axios from "axios"
 const initialState = {
     RealTimeData: [],
     listOfAnimal:[],
-    color:[]
+    color:[],
+    location: null
 }
 
 export const RealTimeContext = createContext();
@@ -43,6 +44,11 @@ export const realTimeReducer = (state, action) =>{
             return{
                 ...state,
                 color: action.payload
+            }
+        case "SET_FLYTO":
+            return{
+                ...state,
+                location: action.payload
             }
         default:
             return state;
@@ -112,7 +118,7 @@ export const RealTimeContextProvider = ({children}) =>{
 
 
     return (
-        <RealTimeContext.Provider value={{state, }}>
+        <RealTimeContext.Provider value={{state, dispatch }}>
             {children}
         </RealTimeContext.Provider>
     )
