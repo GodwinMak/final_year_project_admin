@@ -18,7 +18,7 @@ import { Radio } from "@material-tailwind/react";
 import Datepicker from "flowbite-datepicker/Datepicker";
 import { useNavigate } from "react-router-dom";
 import {useAnimalContext} from "../../hooks/useAnimalContext"
-
+import { url } from "../../utils/API";
 
 const Animal_List = () => {
 
@@ -37,7 +37,7 @@ const Animal_List = () => {
     const fetchAreaNames = async () => {
       try {
         const response = await axios.get(
-          "https://apiv2.at.patrickmamsery.co.tz/api/areas/all"
+          `${url}/api/areas/all`
         );
         const data = response.data;
         setAreaNames(data);
@@ -89,7 +89,7 @@ const Animal_List = () => {
     try {
       // Update the user data using the endpoint http://localhost/api/users/:id
       await axios.put(
-        `https://apiv2.at.patrickmamsery.co.tz/api/animals/${animalToEdit.user_id}`,
+        `${url}/api/animals/${animalToEdit.user_id}`,
         updatedUserData
       );
 
@@ -116,7 +116,7 @@ const Animal_List = () => {
       console.log(animalToDelete)
       try {
         await axios.delete(
-          `https://apiv2.at.patrickmamsery.co.tz/api/animals/deleteAnimal/${animalToDelete.animal_TagId}`
+          `${url}/api/animals/deleteAnimal/${animalToDelete.animal_TagId}`
         );
         // Update the tableData state by removing the deleted user
         setTableData((prevTableData) =>
@@ -213,7 +213,7 @@ const Animal_List = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://apiv2.at.patrickmamsery.co.tz/api/animals/?page=${meta.currentPage}&pageSize=${meta.pageSize}`);
+        const response = await axios.get(`${url}/api/animals/?page=${meta.currentPage}&pageSize=${meta.pageSize}`);
         const { animals, meta: responseMeta } = response.data;
         const animalsWithAge = animals.map(animal => ({
           ...animal,

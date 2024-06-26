@@ -9,6 +9,7 @@ import DeckGl, { FlyToInterpolator, } from "deck.gl";
 import { PathLayer } from "@deck.gl/layers";
 import axios from 'axios'
 import NoArea from "../../pages/NoContentPage/NoArea";
+import { url } from "../../utils/API";
 
 
 const Areas = () => {
@@ -18,9 +19,8 @@ const Areas = () => {
     const fetchData = async () => {
       try {
         await axios
-          .get("https://apiv2.at.patrickmamsery.co.tz/api/areas/all")
+          .get(`${url}/api/areas/all`)
           .then((res) => {
-            console.log(res.data)
             setAreas(res.data);
           });
 
@@ -60,7 +60,6 @@ const Areas = () => {
     };
   }
 
-  // console.log(convertToGeoJSON(areas));
   const AreaData = convertToGeoJSON(areas);
 
   const [viewport, setViewport] = useState({

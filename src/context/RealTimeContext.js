@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {createContext, useEffect, useReducer} from "react";
-import io from "socket.io-client";
 import axios from "axios"
+import { url } from "../utils/API";
 
 const initialState = {
     RealTimeData: [],
@@ -21,6 +21,7 @@ export const realTimeReducer = (state, action) =>{
             };
         case 'NEW_DATA':
             const newData = action.payload;
+            console.log(newData)
             // Update animal location for the corresponding animal
             const updatedRealTimeData = state.RealTimeData.map(animal => {
                 if (animal.animal_TagId === newData.animal_TagId) {
@@ -57,7 +58,7 @@ export const realTimeReducer = (state, action) =>{
 
 
 export const RealTimeContextProvider = ({children}) =>{
-    const socket = io.connect(`https://apiv2.at.patrickmamsery.co.tz/api/socket`)
+    // const socket = io.connect(`${url}`)
 
     const [state, dispatch] = useReducer(realTimeReducer, initialState);
 
@@ -65,7 +66,7 @@ export const RealTimeContextProvider = ({children}) =>{
         // Fetch list of animal data from the database
         const fetchAnimalData = async () => {
             try {
-                const response = await axios.get(`https://apiv2.at.patrickmamsery.co.tz/api/animals/`);
+                const response = await axios.get(`${url}/api/animals/`);
                 const animalTagIds = response.data.animals.map(animal => animal.animal_TagId);
                 dispatch({ type: "LIST_ANIMAL", payload: animalTagIds });
             } catch (error) {
@@ -81,7 +82,7 @@ export const RealTimeContextProvider = ({children}) =>{
         if (state.listOfAnimal.length <= 1) return;
         const fetchRealTimeData = async () => {
             try {
-                const response = await axios.get(`https://apiv2.at.patrickmamsery.co.tz/api/animals/realtime`, {
+                const response = await axios.get(`${url}/api/animals/realtime`, {
                     params: {
                         animalTagIds: state.listOfAnimal.join(',')
                     }
@@ -98,7 +99,7 @@ export const RealTimeContextProvider = ({children}) =>{
     useEffect (() =>{
         const fetchData = async ()=>{
             try {
-                const response = await axios.get(`https://apiv2.at.patrickmamsery.co.tz/api/animals/getColour`)  
+                const response = await axios.get(`${url}/api/animals/getColour`)  
                 dispatch({ type: "SET_COLOR", payload: response.data})
             } catch (error) {
                 console.log(error)
@@ -108,13 +109,14 @@ export const RealTimeContextProvider = ({children}) =>{
         fetchData()
     },[])
 
-    useEffect(()=> {
-        socket.on("newAnimalData", (newData) => {
-            dispatch({type:"NEW_DATA", payload: newData} )
-        });
+    // useEffect(()=> {
+    //     socket.on("newAnimalData", (newData) => {
+    //         console.log(newData);
+    //         dispatch({type:"NEW_DATA", payload: newData} )
+    //     });
 
-        return () => socket.disconnect();
-    },[])
+    //     return () => socket.disconnect();
+    // },[])
 
 
     return (

@@ -23,7 +23,6 @@ const AdminDashboard = () => {
   let { state, dispatch } = useContext(Context);
   const {category} = useParams();
   const user = useAuthContext()
-  console.log(category)
 
   let [size, setSize] = useState(1000)
   window.addEventListener('resize', (e) => {

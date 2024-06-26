@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
+import { url } from "../../utils/API";
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const AddUser = () => {
     const fetchData = async ()=>{
       try {
         const response = await axios.get(
-          "https://apiv2.at.patrickmamsery.co.tz/api/areas/all"
+          `${url}/api/areas/all`
         );
 
         setAreas(response.data)
@@ -47,7 +48,7 @@ const AddUser = () => {
      const area =  areas.find((a) => a.area_name === area_name);
     try {
      await axios.post(
-        "https://apiv2.at.patrickmamsery.co.tz/api/users/register",
+        `${url}/api/users/register`,
         {
           first_name,
           last_name,

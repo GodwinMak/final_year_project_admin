@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {useAuthContext} from "./useAuthContext";
 import axios from 'axios'
+import { url } from "../utils/API";
 
 export const useLogin =() =>{
     const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ export const useLogin =() =>{
         setError(null);
         try {
          await axios.post(
-              "https://apiv2.at.patrickmamsery.co.tz/api/users/login",
+              `${url}/api/users/login`,
               { username, password }
             ).then((res)=>{
                 localStorage.setItem(

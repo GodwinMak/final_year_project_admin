@@ -4,6 +4,7 @@ import { Textarea, Select } from "flowbite-react";
 import Datepicker from "flowbite-datepicker/Datepicker";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import { url } from '../../utils/API';
 
 const AddAnimal = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const AddAnimal = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "https://apiv2.at.patrickmamsery.co.tz/api/areas/all"
+                    `${url}/api/areas/all`
                 );
 
                 setAreas(response.data)
@@ -64,7 +65,7 @@ const AddAnimal = () => {
             if (areas.length === 0) return;
             const area = areas.find((a) => a.area_name === area_name);
 
-            await axios.post("https://apiv2.at.patrickmamsery.co.tz/api/animals/createAnimal", {
+            await axios.post(`${url}/api/animals/createAnimal`, {
                 animal_name,
                 animal_sex,
                 animal_description,

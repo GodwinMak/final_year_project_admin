@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useAreaContext } from "../../hooks/useAreaContext";
 import axios from 'axios'
+import { url } from "../../utils/API";
 
 const AddArea = () => {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ const AddArea = () => {
   const { dispatch: areaDispatch } = useAreaContext();
 
 
-  console.log(areaLocation);
 
   const [values, setValues] = useState({
     area_name: "",
@@ -43,7 +43,7 @@ const AddArea = () => {
     };
     try {
        await axios
-         .post("https://apiv2.at.patrickmamsery.co.tz/api/areas/create", {
+         .post(`${url}/api/areas/create`, {
            area_name,
            area_area: areaLocation.locationArea,
            area_location,

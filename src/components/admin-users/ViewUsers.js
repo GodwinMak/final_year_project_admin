@@ -13,6 +13,7 @@ import { SearchIcon } from "../../utils/Icons";
 import axios from "axios";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import { url } from "../../utils/API";
 
 const ViewUsers = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
@@ -27,7 +28,7 @@ const ViewUsers = () => {
     const fetchAreaNames = async () => {
       try {
         const response = await axios.get(
-          "https://apiv2.at.patrickmamsery.co.tz/api/areas/all"
+          `${url}/api/areas/all`
         );
         const data = response.data;
         setAreaNames(data);
@@ -62,7 +63,7 @@ const ViewUsers = () => {
     try {
       // Update the user data using the endpoint http://localhost/api/users/:id
        await axios.put(
-        `https://apiv2.at.patrickmamsery.co.tz/api/users/${userToEdit.user_id}`,
+        `${url}/api/users/${userToEdit.user_id}`,
         updatedUserData
       );
 

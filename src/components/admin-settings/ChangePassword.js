@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { ToastContainer, toast } from "react-toastify";
+import { url } from '../../utils/API';
 
 
 const ChangePassword = () => {
@@ -27,7 +28,7 @@ const ChangePassword = () => {
     event.preventDefault();
     try {
       const {oldPassword, newPassword} = values;
-      await axios.put(`https://apiv2.at.patrickmamsery.co.tz/api/users/changePassword/${user.user.user.user_id}`, { oldPassword, newPassword })
+      await axios.put(`${url}/api/users/changePassword/${user.user.user.user_id}`, { oldPassword, newPassword })
           .then((res) => {
             toast.success(res.data.message, toastOptions)
             setValues({oldPassword: "", newPassword: ""})

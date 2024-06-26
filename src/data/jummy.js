@@ -93,7 +93,7 @@ export const Data = [
     {
         specialInsideSidebar: true,
         insideSidebar: true,
-        previllage: 'user',
+        previllage: 'all',
         icon: "fa fa-bar-chart",
         inside:[
             {

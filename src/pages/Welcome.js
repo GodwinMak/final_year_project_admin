@@ -6,7 +6,7 @@ const Welcome = () => {
     <div className=" flex flex-col  bg-gray-100 ">
       <div className="p-3">
         <h2>Welcome To Animal Watch</h2>
-        <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+        <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7">
             <div className="rounded-sm border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
               <div className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">

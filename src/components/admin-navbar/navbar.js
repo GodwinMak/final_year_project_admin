@@ -5,11 +5,11 @@ import { Context } from "../../context";
 import { useLogout } from "../../hooks/useLogOut";
 
 const Navbar = () => {
-  const {logout} = useLogout();
+  const { logout } = useLogout();
 
-  const handleLogout =()=>{
-    logout()
-  }
+  const handleLogout = () => {
+    logout();
+  };
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [isNotificationDropdownOpen, setNotificationDropdownOpen] =
     useState(false);
@@ -65,7 +65,7 @@ const Navbar = () => {
             onClick={toogle}
             className="text-xl font-semibold leading-8 text-[#19191c] cursor-pointer "
           >
-            <i className="fa fa-bars"/>
+            <i className="fa fa-bars" />
           </div>
         </div>
         <div className="justify-start items-center gap-8 flex">

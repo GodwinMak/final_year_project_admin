@@ -11,11 +11,9 @@ const Sidebar = () => {
 
   const user = useAuthContext()
   const page = useParams()
-  console.log(page)
 
 
   const filteredData = Data.filter(icon => {
-    console.log(icon.previllage)
     if (user.user.user.user.role === 'admin' && (icon.previllage === 'admin' || icon.previllage === 'all')) {
       return true;
     } else if (user.user.user.user.role === 'user' && (icon.previllage === 'user' || icon.previllage === 'all')) {
@@ -36,7 +34,6 @@ const Sidebar = () => {
   const [insideSidebar, setInsideSidebar] = useState(localStorage.getItem("insideSidebar") === "true")
 
 
-  console.log(insideSidebar, specialInsideSidebar)
   let ClickedIcon = (iconName) => {
     if (iconName.insideSidebar) {   
       setInsideSidebar(true)

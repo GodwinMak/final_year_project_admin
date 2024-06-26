@@ -85,7 +85,7 @@ const RealTimeSidebar = () => {
                  <div className="flex-grow"></div>
                  <div className="w-28 h-12  rounded-none" style={{ background: data.color }}></div>
                </div>
-               <hr class="border-t border-gray-500 my-4"></hr>
+               <hr className="border-t border-gray-500 my-4"></hr>
                <div>
                  <h3 className='text-sm font-semibold'>Date birth: {data.birthday}</h3>
                  <h3 className='text-sm font-semibold'>current Location: {data.data.coordinates[1]} {data.data.coordinates[0]}</h3>
@@ -112,7 +112,7 @@ const RealTimeSidebar = () => {
                   <div className="flex-grow"></div>
                   <div className="w-28 h-12  rounded-none" style={{ background: data.color }}></div>
                 </div>
-                <hr class="border-t border-gray-500 my-4"></hr>
+                <hr className="border-t border-gray-500 my-4"></hr>
                 <div>
                   <h3 className='text-sm font-semibold'>Date birth: {data.birthday}</h3>
                   <h3 className='text-sm font-semibold'>current Location: {data.data.coordinates[1]} {data.data.coordinates[0]}</h3>
