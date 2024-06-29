@@ -11,13 +11,13 @@ import AddUser from '../../components/admin-users/AddUser';
 import AnimalList from '../../components/admin_animal/Animal_List';
 import AreaMap from '../../components/admin-areas/AreaMap';
 import ChangePassword from '../../components/admin-settings/ChangePassword';
-import Profile from "../../components/admin-settings/Profile"
+// import Profile from "../../components/admin-settings/Profile"
 import Welcome from '../Welcome';
 import AddAnimal from '../../components/admin_animal/AddAnimal';
 import ViewAnimal from '../../components/admin_animal/ViewAnimal';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import RealTimeMap from '../../components/Map/RealTimeMap';
-import History from '../../components/Map/History';
+import RealTimeMap from '../../components/Map/RealTime/RealTimeMap';
+import Analysis from '../../components/Map/Analysis';
 
 const AdminDashboard = () => {
   let { state, dispatch } = useContext(Context);
@@ -53,26 +53,36 @@ const AdminDashboard = () => {
               : ` ${state.toggleNavbar ? "md:ml-[90px]" : "ml-0"}`
           }  w-full  z-10 mt-[76px]`}
         >
+          {user && user.user.user.user.role === "root" && (
+            <>
+              {category === "welcome" && <Welcome />}
+              {category === "add_area" && <AddArea />}
+              {category === "view_areas" && <Areas />}
+              {category === "area_map" && <AreaMap />}
+              {category === "view_users" && <ViewUsers />}
+              {category === "add_user" && <AddUser />}
+            </>
+          )}
           {user && user.user.user.user.role === "admin" && (
             <>
               {category === "welcome" && <Welcome />}
               {category === "add_user" && <AddUser />}
               {category === "view_users" && <ViewUsers />}
-              {category === "edit_user" && <AddUser />}
-              {category === "add_area" && <AddArea />}
-              {category === "view_areas" && <Areas />}
-              {category === "area_map" && <AreaMap />}
               {category === "add_animal" && <AddAnimal />}
               {category === "view_animals" && <AnimalList />}
               {category === "events_reports" && <Reports />}
               {category === "view_animal" && <ViewAnimal />}
+              {category === "real_time" && <RealTimeMap />}
+              {category === "analysis" && <Analysis />}
             </>
           )}
           {category === "change_password" && <ChangePassword />}
-          {category === "real_time" && <RealTimeMap />}
-          {category === "profile" && <Profile />}
+          {/* {category === "profile" && <Profile />} */}
           {user && user.user.user.user.role === "user" && (
-            <>{category === "history" && <History />}</>
+            <>
+              {category === "analysis" && <Analysis />}
+              {category === "real_time" && <RealTimeMap />}
+            </>
           )}
         </div>
       </div>

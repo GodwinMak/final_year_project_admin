@@ -7,52 +7,76 @@ const initialState = {
     RealTimeData: [],
     listOfAnimal:[],
     color:[],
-    location: null
+    location: null,
+    modal: false,
+    layer: "",
+    selectedAnimal: [],
+    numberOfDays: 1
 }
 
 export const RealTimeContext = createContext();
 
 export const realTimeReducer = (state, action) =>{
     switch (action.type) {
-        case 'SET_REAL_TIME_DATA':
+      case "SET_REAL_TIME_DATA":
+        return {
+          ...state,
+          RealTimeData: action.payload,
+        };
+      case "NEW_DATA":
+        const newData = action.payload;
+        console.log(newData);
+        // Update animal location for the corresponding animal
+        const updatedRealTimeData = state.RealTimeData.map((animal) => {
+          if (animal.animal_TagId === newData.animal_TagId) {
             return {
-                ...state,
-                RealTimeData: action.payload
+              ...animal,
+              animalLocations: [...animal.animalLocations, newData],
             };
-        case 'NEW_DATA':
-            const newData = action.payload;
-            console.log(newData)
-            // Update animal location for the corresponding animal
-            const updatedRealTimeData = state.RealTimeData.map(animal => {
-                if (animal.animal_TagId === newData.animal_TagId) {
-                    return {
-                        ...animal,
-                        animalLocations: [...animal.animalLocations, newData]
-                    };
-                }
-                return animal;
-            });
-            return {
-                ...state,
-                RealTimeData: updatedRealTimeData
-            };
-        case 'LIST_ANIMAL':
-            return {
-                ...state,
-                listOfAnimal: action.payload
-            };
-        case "SET_COLOR":
-            return{
-                ...state,
-                color: action.payload
-            }
-        case "SET_FLYTO":
-            return{
-                ...state,
-                location: action.payload
-            }
-        default:
-            return state;
+          }
+          return animal;
+        });
+        return {
+          ...state,
+          RealTimeData: updatedRealTimeData,
+        };
+      case "LIST_ANIMAL":
+        return {
+          ...state,
+          listOfAnimal: action.payload,
+        };
+      case "SET_COLOR":
+        return {
+          ...state,
+          color: action.payload,
+        };
+      case "SET_FLYTO":
+        return {
+          ...state,
+          location: action.payload,
+        };
+      case "MODAL":
+        return {
+          ...state,
+          modal: action.payload,
+        };
+      case "LAYER":
+        return {
+          ...state,
+          layer: action.payload,
+        };
+      case "SELECTED_ANIMALS":
+        return {
+          ...state,
+          selectedAnimal: action.payload,
+        };
+      case "NUMBER_OF_DAYS":
+        return {
+          ...state,
+          numberOfDays: action.payload,
+        };
+      default:
+        return state;
     }
 }
 

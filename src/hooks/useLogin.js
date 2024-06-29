@@ -16,6 +16,7 @@ export const useLogin =() =>{
               `${url}/api/users/login`,
               { username, password }
             ).then((res)=>{
+                console.log(res.data.user.role)
                 localStorage.setItem(
                   "user",
                   JSON.stringify({
@@ -27,11 +28,15 @@ export const useLogin =() =>{
                   payload: { user: res.data },
                 });
                 setIsLoading(false);
-                window.location = "/admin-dashboard/welcome";
+                if(res.data.user.role !== "user"){
+                  window.location = "/admin-dashboard/welcome";
+                }else{
+                  window.location = "/admin-dashboard/real_time";
+                }
             })
         } catch (error) {
             setIsLoading(false)
-            setError(error.response.data);
+            setError(error.message);
         }
 
         

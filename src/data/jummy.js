@@ -2,7 +2,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: false,
-        previllage: 'admin',
+        previllage: ['admin', 'root'],
         icon: "fa fa-home",
         inside: [
             {
@@ -14,7 +14,7 @@ export const Data = [
     {
         specialInsideSidebar: true,
         insideSidebar: true,
-        previllage: 'all',
+        previllage: ['admin', 'user'],
         icon: "fa fa-wifi",
         inside: [
             {
@@ -26,7 +26,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-        previllage: 'admin',
+        previllage: ["admin", "root"],
         icon: 'fa-solid fa-user',
         inside: [
             {
@@ -44,7 +44,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-        previllage: 'admin',
+        previllage: ['root'],
         icon: 'fa-solid fa-globe',
         inside: [
             {
@@ -62,7 +62,7 @@ export const Data = [
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-        previllage: 'admin',
+        previllage: ['admin'],
         icon: 'fa-solid fa-paw',
         inside: [
             {
@@ -78,40 +78,27 @@ export const Data = [
         ]
     },
     {
-        specialInsideSidebar: false,
-        insideSidebar: true,
-        previllage: 'admin',
-        icon: 'fa-solid fa-calendar-days',
-        inside: [
-            {
-                icon: 'fa-solid fa-calendar',
-                text: 'Event Report',
-                url: 'events_reports'
-            }
-        ]
-    },
-    {
         specialInsideSidebar: true,
         insideSidebar: true,
-        previllage: 'all',
+        previllage: ['user', 'admin'],
         icon: "fa fa-bar-chart",
         inside:[
             {
-                url: "history"
+                url: "analysis"
             }
         ]
     },
     {
         specialInsideSidebar: false,
         insideSidebar: true,
-        previllage: 'all',
+        previllage: ['all'],
         icon: 'fa-solid fa-gear',
         inside: [
-            {
-                icon: "fa-solid fa-user",
-                text: "Profile",
-                url: "profile"
-            },
+            // {
+            //     icon: "fa-solid fa-user",
+            //     text: "Profile",
+            //     url: "profile"
+            // },
             {
                 icon: 'fa-solid fa-lock',
                 text: 'Change Password',

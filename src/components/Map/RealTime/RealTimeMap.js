@@ -2,22 +2,24 @@ import React from "react";
 import DeckGl, { FlyToInterpolator } from "deck.gl";
 import Map from "react-map-gl";
 import { IconLayer, PathLayer } from "@deck.gl/layers";
-import { useAreaContext } from "../../hooks/useAreaContext";
-import { useRealTimeContext } from "../../hooks/useRealTimeContext";
+import { useAreaContext } from "../../../hooks/useAreaContext";
+import { useRealTimeContext } from "../../../hooks/useRealTimeContext";
 import turf from "turf";
 import * as nearest  from "@turf/turf"
-import { url } from "../../utils/API";
-import axios from "axios";
 const RealTimeMap = () => {
   const Area = useAreaContext();
   const realTimeData = useRealTimeContext();
   const [animalData, setAnimalData] = React.useState([]);
-  const [areas, setAreas] = React.useState([]);
   const [insideGeofence, setInsideGeofence] = React.useState([]);
   const [outsideGeofence, setOutsideGeofence] = React.useState([]);
   const [distances, setDistances] = React.useState({});
-  const [layers, setLayers] = React.useState([]);
+  const [layers1, setLayers1] = React.useState(null);
+  const [layers2, setLayers2] = React.useState(null);
+
+
   const[leftsideBar, setLeftSideBar] = React.useState(false)
+
+
 
   React.useEffect(() => {
     const inside = [];
@@ -68,8 +70,6 @@ const RealTimeMap = () => {
 
    React.useEffect(() => {
      if (realTimeData.state.RealTimeData.length !== 0) {
-      console.log("here")
-      console.log(realTimeData.state.RealTimeData);
        const updatedAnimalData = realTimeData.state.RealTimeData.map((objt) => {
          const data2 = realTimeData.state.color.find(
            (objt2) => objt2.id === objt.animal_TagId
@@ -103,23 +103,11 @@ const RealTimeMap = () => {
    // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [realTimeData.state.RealTimeData]);
 
-  
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await axios.get(`${url}/api/areas/all`).then((res) => {
-          setAreas(res.data);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
-    fetchData();
-  }, []);
 
   React.useEffect(() => {
-    if(animalData.length !== 0){}
+    if (animalData.length !== 0) {
+    }
     const iconLayer = new IconLayer({
       id: "IconLayer",
       data: animalData,
@@ -133,23 +121,31 @@ const RealTimeMap = () => {
         "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.json",
       pickable: true,
     });
+    
 
-    const pathLayer = new PathLayer({
-      id: "PathLayer",
-      data: areas,
-      pickable: true,
-      widthScale: 20,
-      widthMinPixels: 2,
-      getPath: (d) => d.area_polygon.coordinates[0],
-      getColor: (d) => {
-        const hex = "#ed1c24";
-        return hex.match(/[0-9a-f]{2}/g).map((x) => parseInt(x, 16));
-      },
-      getWidth: (d) => 5,
-    });
+    setLayers1(iconLayer);
+  }, [animalData]);
 
-    setLayers([iconLayer, pathLayer]);
-  }, [animalData, areas]);
+  React.useEffect(()=>{
+    if( Object.keys(Area.Area).length > 0){
+      const area = [Area.Area];
+      const pathLayer = new PathLayer({
+        id: "PathLayer",
+        data: area,
+        pickable: true,
+        widthScale: 20,
+        widthMinPixels: 2,
+        getPath: (d) => d.area_polygon.coordinates[0],
+        getColor: (d) => {
+          const hex = "#ed1c24";
+          return hex.match(/[0-9a-f]{2}/g).map((x) => parseInt(x, 16));
+        },
+        getWidth: (d) => 5,
+      });
+      setLayers2(pathLayer);
+    }
+    
+  },[Area.Area])
 
   const [viewport, setViewport] = React.useState({
     longitude: 0,
@@ -158,14 +154,14 @@ const RealTimeMap = () => {
   });
 
   React.useEffect(() => {
-    if (areas[0]) {
+    if (Object.keys(Area.Area).length > 0) {
       setViewport({
-        longitude: areas[0].area_location.coordinates[0],
-        latitude: areas[0].area_location.coordinates[1],
+        longitude: Area.Area.area_location.coordinates[0],
+        latitude: Area.Area.area_location.coordinates[1],
         zoom: viewport.zoom, // Preserve current zoom level
       });
     }
-  }, [areas, viewport.zoom]);
+  }, [Area.Area, viewport.zoom]);
 
   React.useEffect(() => {
     if (realTimeData.state.location) {
@@ -190,7 +186,7 @@ const RealTimeMap = () => {
           width: "calc(100vw)",
           position: "relative",
         }}
-        layers={layers}
+        layers={[layers1, layers2]}
         getTooltip={({ object }) => console.log(object)}
       >
         <Map
